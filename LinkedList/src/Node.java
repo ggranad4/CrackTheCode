@@ -34,7 +34,7 @@ public class Node {
 		listOfNumbers.add(n.data);
 		while(n.next != null) {
 			Node linkToList = n; 
-			if(listOfNumbers.contains(n)) {
+			if(listOfNumbers.contains(n.data)) {
 				n = n.next;
 			}
 			else {
@@ -44,7 +44,16 @@ public class Node {
 			
 			
 		}
+		return head;
 		
+	}
+	void showList() {
+		Node n = this;
+		while(n.next != null) {
+			System.out.print(n.data + " --> ");
+			n = n.next;
+		}
+		System.out.println(n.data);
 	}
 	
 }
