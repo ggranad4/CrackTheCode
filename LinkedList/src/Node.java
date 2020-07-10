@@ -13,6 +13,7 @@ public class Node {
 			n = n.next;
 		}
 		n.next= end;
+		end.next = null;
 	}
 	Node deleteNode(Node head, int d) {
 		if(head == null) return null;
@@ -28,21 +29,21 @@ public class Node {
 		return head;
 	}
 	Node deleteDuplicates(Node head) {
-		if(head == null) return null;
+		if(head == null) head = null;
 		ArrayList<Integer> listOfNumbers = new ArrayList<>();
 		Node n = head;
-		listOfNumbers.add(n.data);
-		while(n.next != null) {
-			Node linkToList = n; 
-			if(listOfNumbers.contains(n.data)) {
-				n = n.next;
+		Node previous = null;
+		//2-->1-->2-->null
+		while(n != null) {
+			if(listOfNumbers.contains(n.data) ) {
+				n = previous;
+				n.next = n.next.next;
 			}
 			else {
 				listOfNumbers.add(n.data);
-				linkToList.next = n;
+				previous = n;
 			}
-			
-			
+			n = n.next;
 		}
 		return head;
 		
@@ -52,8 +53,11 @@ public class Node {
 		while(n.next != null) {
 			System.out.print(n.data + " --> ");
 			n = n.next;
+		
 		}
 		System.out.println(n.data);
+		
 	}
+
 	
 }
