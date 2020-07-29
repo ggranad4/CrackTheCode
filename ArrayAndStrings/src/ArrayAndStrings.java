@@ -12,8 +12,7 @@ public class ArrayAndStrings {
 		System.out.println(urlify("Mr John Smith", 13));
 		System.out.println("is atcocta a palidrome : " + isPermutationPalindrome("atcocta"));
 		System.out.println("is pales, pale one away: " + isOneAway("pales", "pale"));
-		String output = stringCompression("aabcccccaaa");
-		System.out.println("aabcccccaaa compressed is : " + output);
+		System.out.println("aabcccccaaa compressed is : " + stringCompression("aabcccccaaa"));
 	}
 	static boolean isUnique(String string) {
 		boolean lettersAdded[] = new boolean[128];
