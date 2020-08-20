@@ -1,5 +1,4 @@
 package stackAndQueue;
-
 public class main {
 	public static void main(String[] args) {
 		StackWithMin stack = new StackWithMin();
@@ -15,8 +14,6 @@ public class main {
 		System.out.println(stack.pop());
 		System.out.println(stack.pop());
 		System.out.println(stack.min());
-		
-		
 
 	}
 }
