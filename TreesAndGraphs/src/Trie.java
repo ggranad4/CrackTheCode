@@ -1,17 +1,18 @@
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.Map.Entry;
-import java.util.Set;
 
-import javax.swing.text.html.HTMLDocument.Iterator;
 
 public class Trie {
 	public static void main(String[] args) {
 		Trie trie = new Trie();
-		trie.insert("grardo");
-		trie.insert("gerad");
-		trie.insert("gsraso");
+		trie.insert("carpet ha");
+		trie.insert("catless");
+		trie.insert("cape");
+		trie.insert("cactus");
 		
-		trie.print("gera");
+		trie.suggestions("ca");
 	}
 	public class TrieNode {
 	    private char c;
@@ -89,14 +90,54 @@ public class Trie {
     }
     
     
-    public void print(String word) {
+    public void suggestions(String word) {
     		HashMap<Character, TrieNode> children = root.getChildren();
-    		TrieNode node = children.get((word.charAt(0)));
-
-    		for(Character letter: node.children.keySet() ) {
-    			System.out.println(word + letter);
+    		TrieNode node = null;
+    		char letter = ' ';
+    		for(int i = 0; i < word.length(); i++) {
+    			letter = word.charAt(i);
+    			if(children.containsKey(letter)) {
+    				node = children.get(letter);
+    				children = node.getChildren();
+    			}
+    			else {
+    				node = null;
+    				break;
+    			}
+    		}
+    		if(node != null) {
+    			String s = traverseThrough(node);
+    			s = s.replace(",", " ");
+    			ArrayList<String> suggestions = new ArrayList<>();
+    			String single = "";
+    			for(Character letters: s.toCharArray()) {
+    				if(letters != ' ') {
+    					single = single + "" + letters;
+    				}
+    				else if(!single.equals("")) {
+    					suggestions.add(single);
+    					single = "";
+    				}
+    			}
+    			for(String words: suggestions) {
+    				System.out.println(word + words);
+    			}
     		}
     }
+    
+    public String traverseThrough(TrieNode node) {
+    		StringBuilder sb = new StringBuilder();
+    		HashMap<Character,TrieNode> children = node.children;
+    		Iterator<Entry<Character, TrieNode>> it = children.entrySet().iterator();
+    			while(it.hasNext()) {
+    				node = it.next().getValue();
+    				sb.append(node.c);
+    				sb.append(traverseThrough(node));
+    				sb.append(",");
+    				
+    			}
+    			return sb.toString();
+    		}
 }
 	
 
